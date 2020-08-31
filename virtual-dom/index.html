@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./path.js"></script>
+    <style>
+        #myVideo::-webkit-media-controls{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <input type="time">
+    <video id="myVideo" src="https://ugccsy.qq.com/uwMROfz2r57EIaQXGdGnC2dePkZaz9nvINvy8qtBz-4opyj0/szg_4531_50001_0b6b2uadgaaakaakm4jkjzpvdvodgpkqam2a.f622.mp4?sdtfrom=v1010&guid=0c16d0ed97b4cbc0265de1feeed7738d&vkey=19311521CED008919BE5A4D4F2FC0840708D18FD0D65DB30146BEBA13775A1623EF1B94199379CDA4E6EC2BE5322A8BB06BE5D0001648D079EE2780B976CE1BCBB91BB7C78D38BB0EA22581EA6F398214F149870D3E631A2FA7EF731B390B65C1D6EFAA5D4B3F85CC085AA27CF9DDD60A83F0E77FA9CB1D668FD9CFDE9C29153"></video>
+    <div id="App">
+    </div>
+    <script>
+        let state = {
+            num:5
+        }
+        let timer = null
+        let preDom = null
+
+        const nodePathTypes = {
+            CREATE:'create node',
+            REMOVEL:'remove node',
+            REPLACE:'replace node',
+            UPDATE:'update node'
+        }
+
+
+        const propPathTypes = {
+            REMOVEL:'remove prop',
+            UPDATE:'update prpop'
+        }
+        
+        function render (element){
+            let vDom = view()
+            preDom = vDom
+
+            let dom = createElement(vDom)
+            element.appendChild(dom)
+
+            timer = setInterval(() => {
+                state.num++
+                tick(element)
+            },1000)
+
+        }
+
+        function tick(element){
+            if (state.num > 20) {
+                clearTimeout(timer);
+                return;
+            }
+
+            let newVDom = view()
+            
+            element.childNodes.forEach((child) => {
+                diff(preDom, newVDom, element, child)
+            })
+        }
+
+        function diff(oldVDom, newVDom, parent, element){
+            
+            if(!element || element.nodeType === 3){
+                return
+            }
+            // 创建
+            
+            if(!oldVDom){
+                parent.appendChild(createElement(newVDom))
+            }
+            
+            // 删除
+            if(!newVDom){
+                parent.removeChild(element)
+            }
+            // 替换
+            if(typeof oldVDom !== typeof newVDom || ((typeof oldVDom === 'string' || typeof oldVDom === 'number') && oldVDom !== newVDom) || oldVDom.tag !== newVDom.tag){
+                parent.replaceChild(createElement(newVDom), element);
+            }
+            // 更新
+            if(oldVDom.tag){
+                // 比较props的变化
+                diffProps(oldVDom, newVDom, element);
+
+                // 比较children的变化
+                diffChildren(oldVDom, newVDom, element);            
+            }
+        }
+
+        function diffProps(oldVDom, newVDom,element){
+            let allProps = {...oldVDom.props, ...newVDom.props}
+            Object.keys(allProps).forEach((key) => {
+                let oldValue = oldVDom.props[key]
+                let newValue = newVDom.props[key]
+                // 删除属性
+                if(!newValue){
+                    element.removeAttribute(key);
+                }else{
+                    element.setAttribute(key,newValue);
+                }
+            })
+            
+        }
+        function diffChildren(oldVDom, newVDom,element){
+            // 获取子元素最大长度
+            const childLength = Math.max(oldVDom.children ? oldVDom.children.length : 0, newVDom.children ? newVDom.children.length : 0);
+
+            for (let i = 0; i < childLength; i++) {
+                
+                diff(oldVDom.children[i], newVDom.children[i],element,element.childNodes[i])
+            }
+        }
+        
+        function view (){
+            return vDom = {
+                tag: 'div',
+                props: {
+                    id:'div',
+                },
+                children:[...Array(state.num).keys()].map(i => {
+                    return {
+                        tag:'li',
+                        props:{
+                            id:`li${i}`,
+                            class:'li1'
+                        },
+                        children:['第',i]
+                    }
+                })
+            }
+        }
+         
+
+        render(document.getElementById('App'))
+    </script>
+</body>
+</html>

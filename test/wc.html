@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<title>tal-class-detail demo</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./tal-class-detail.js"></script>
+<link rel="stylesheet" href="//unpkg.com/view-design/dist/styles/iview.css">
+<html>
+<body>
+<button id="button">点我</button>
+<tal-class-detail id="classDetail" class-id="bedb3429770b4dd18241c34a457219fc"></tal-class-detail>
+
+</body>
+</html>
+<script>
+    document.getElementById('button').addEventListener('click',function () {
+        document.getElementById('classDetail').setAttribute('show',true)
+    },false)
+    document.getElementById('classDetail').addEventListener('close',function (e) {
+        document.getElementById('classDetail').setAttribute('show',false)
+    },false)
+</script>
+
