@@ -38,6 +38,85 @@
         
     </script>
 
+
+    <div id="contaner">
+        <div class="cc-timeline-item">
+            <div class="cc-timeline-left">
+                <div class="cc-timeline-left-head">
+                    <p class="cc-timeline-left-head-title">来电记录</p>
+                    <p class="cc-timeline-left-head-time">2020-12-26 12:25:29</p>
+                </div>
+                <div class="cc-timeline-left-icon">
+                    <i class="cc-timeline-left-icon-line-t"></i>
+                    <img class="cc-timeline-left-icon-i" src="../image/phone.png" alt="">
+                    <i class="cc-timeline-left-icon-line-b"></i>
+                </div>
+            </div>
+            <div class="cc-timeline-right">
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: rgba(55, 55, 55, 0.6);
+    }
+    #contaner{
+        width: 960px;
+        height: 700px;
+        margin: 100px auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background-color: white;
+    }
+    .cc-timeline-item{
+        display: flex;
+    }
+    .cc-timeline-left{
+        flex: 0 1 300px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .cc-timeline-left-head{
+        text-align: right;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+    }
+    .cc-timeline-left-icon{
+        flex: 0 1 100px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    .cc-timeline-left-icon-line-t{
+        width: 1px;
+        background-color: #dcdcdc;
+        flex: 1 0 auto;
+    }
+    .cc-timeline-left-icon-line-b{
+        width: 1px;
+        background-color: #dcdcdc;
+        flex: 1 0 auto;
+    }
+    .cc-timeline-left-icon-i{
+        width: 50px;
+        height: 50px;
+    }
+
+    .cc-timeline-right{
+        flex: 1 1 auto;
+        margin: 10px;
+        padding: 15px 10px;
+        min-height: 100px;
+        border-radius: 5px;
+        border:1px #dcdcdc solid;
+    }
+</style>
