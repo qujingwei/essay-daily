@@ -41,7 +41,11 @@ class FetchRequest {
     }
     instance(options){
         return fetch(options.url, options).then(response => {
-            
+            if (response.status >= 200 && response.status < 300) {
+                return response.json();
+            } else {
+                return Promise.reject(response.statusText)
+            }
         }).catch(error => {
 
         })
