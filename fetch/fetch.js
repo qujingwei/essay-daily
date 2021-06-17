@@ -15,7 +15,7 @@ class FetchRequest {
 
     getInstanceConfig(){
         const config = {
-            baseConfig: this.baseUrl,
+            baseUrl: this.baseUrl,
             headers: {
                 
             },
@@ -24,7 +24,7 @@ class FetchRequest {
         return config
     }
     setOption(options){
-        options = Object.assign(this.getInsideConfig(), options)
+        options = Object.assign(this.getInstanceConfig(), options)
         let url = this.baseUrl + options.url;
         options.method = options.method ? options.method.toUpperCase() : 'GET'
         if(options.params && isObject(options.params)){
