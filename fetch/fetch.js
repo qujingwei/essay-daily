@@ -2,6 +2,12 @@ const isObject = function(o){
     return Object.prototype.toString(o) === "[object Object]"
 }
 
+function runStack (n) { 
+    if (n === 0) return 100; 
+    return runStack( n- 2);
+}
+runStack(50000)
+
 class FetchRequest {
     constructor(baseUrl = ''){
         this.baseUrl = baseUrl
