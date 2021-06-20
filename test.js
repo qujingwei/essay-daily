@@ -22,3 +22,6 @@ console.log(str.substring(-3, -4));  // '' 0 0
 console.log(str.substring(-4, -3));  //'' 0 0
 console.log(str.substr(-3, -4)); // ’‘ 8 0
 console.log(str.substr(-4, -3)); // ’‘ 7 0
+
+let arr = [{a:1},{a:2}]
+arr.find(item => item.a === 2).b = 3
