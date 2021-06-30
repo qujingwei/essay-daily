@@ -25,3 +25,4 @@ console.log(str.substr(-4, -3)); // ’‘ 7 0
 
 let arr = [{a:1},{a:2}]
 arr.find(item => item.a === 2).b = 3
+
