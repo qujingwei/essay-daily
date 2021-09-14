@@ -28,3 +28,28 @@ function throttle(fn, time){
         },time)
     }
 }
+
+
+
+
+function fd(fn, time){
+    let timer = null
+    return function(){
+        if(timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+            fn.apply(null, arguments)
+        },time)
+    }
+}
+
+function jl(fn, time){
+    let isRun = false
+    return function(){
+        if(isRun) return
+        isRun = true
+        setTimeout(() => {
+            fn.apply(this, arguments)
+            isRun = false
+        }, time)
+    }
+}

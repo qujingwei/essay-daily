@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // let arr = 'abcd'
+
+    // function fn(str) {
+    //   let resStr = []
+    //   let fStr = str.slice(0, 1)
+    //   let eStr = str
+
+    //   if (eStr.length) {
+
+    //   }
+
+    //   for (let i = 0; i < eStr.length; i++) {
+    //     const element = eStr[i];
+    //     fStr += element
+    //   }
+
+    //   resStr.push(fStr)
+    // }
+
+
+    // var perm = function (s) {
+    //   var result = [];
+    //   if (s.length <= 1) {
+    //     return [s];
+    //   } else {
+    //     for (var i = 0; i < s.length; i++) {
+    //       var c = s[i];
+    //       var newStr = s.slice(0, i) + s.slice(i + 1, s.length);
+    //       var l = perm(newStr);
+
+    //       for (var j = 0; j < l.length; j++) {
+    //         var tmp = c + l[j];
+    //         result.push(tmp);
+    //       }
+    //     }
+    //   }
+    //   return result;
+    // };
+
+
+
+    // function swap(arr, i, j) {
+    //   var temp = arr[i];
+    //     arr[i] = arr[j];
+    //     arr[j] = temp;
+    // }
+    // function perm(arr) {
+
+    //   (function fn(n) { //为第n个位置选择元素
+    //     for (var i = n; i < arr.length; i++) {
+    //       swap(arr, i, n);
+    //       if (n + 1 < arr.length - 1){//判断数组中剩余的待全排列的元素是否大于1个
+    //         fn(n + 1); //从第n+1个下标进行全排列
+    //       } else{
+    //         console.log(arr); //显示一组结果
+    //       }
+    //       swap(arr, i, n);
+    //     }
+    //   })(0);
+
+    // }
+
+
+    let data = ["a", "b", "c", "d"]
+
+    function jh(arr,i,j){
+      let tmp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = tmp
+    }
+    
+    function pl(arr){
+      (function fn(n){
+        for(let i = n;i < arr.length;i++){
+          if(i < arr.length){
+            jh(arr,i,n)
+            if(n + 1 < arr.length - 1){
+              fn(n + 1)
+            }else{
+              console.log(arr);
+            }
+            
+            jh(arr,i,n)
+          }
+        }
+      })(0)
+    }
+
+    pl(data)
+
+  </script>
+</body>
+
+</html>
